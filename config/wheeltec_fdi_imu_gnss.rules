@@ -1,0 +1,6 @@
+# /etc/udev/rules.d/wheeltec_fdi_imu_gnss.rules
+ACTION=="add",KERNELS=="1-1.4:1.0",SUBSYSTEMS=="usb",MODE:="0777",SYMLINK+="fdilink_ahrs"
+
+# service udev reload
+# sleep 2
+# service udev restart
