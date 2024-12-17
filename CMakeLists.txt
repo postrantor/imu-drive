@@ -15,9 +15,6 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-find_package(Eigen3 REQUIRED)
-set(Eigen3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
-
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -30,10 +27,14 @@ find_package(std_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
-# serial port
+# thirdpart
 find_package(serial REQUIRED)
+find_package(Eigen3 REQUIRED)
 
-include_directories(include)
+include_directories(
+  include
+  ${EIGEN3_INCLUDE_DIR}
+)
 
 add_executable(ahrs_driver_node
   src/ahrs_driver.cpp
@@ -42,7 +43,6 @@ add_executable(ahrs_driver_node
 ament_target_dependencies(ahrs_driver_node
   serial
   rclcpp
-  rclpy
   tf2_ros
   tf2
   std_msgs
@@ -54,13 +54,12 @@ ament_target_dependencies(ahrs_driver_node
 add_executable(imu_tf_node
   src/imu_tf.cpp)
 ament_target_dependencies(imu_tf_node
-  rclcpp
-  rclpy
-  std_msgs
-  sensor_msgs
   serial
+  rclcpp
   tf2_ros
   tf2
+  std_msgs
+  sensor_msgs
   tf2_geometry_msgs
 )
 

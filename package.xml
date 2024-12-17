@@ -9,6 +9,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <depend>serial</depend>
   <depend>rclcpp</depend>
   <depend>rclpy</depend>
   <depend>tf2</depend>
